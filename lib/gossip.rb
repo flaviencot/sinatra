@@ -25,5 +25,11 @@ class Gossip
     return all_gossips
   end
 
+  def self.find(id)
+    gossips = self.all
+
+    return gossips[id.to_i - 1]
+  end
+
 end
 
