@@ -15,16 +15,10 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
 
-  get '/gossips/:id' do
+  get "/gossips/:id/" do
     id = params[:id].to_i
-    # read the CSV file and retrieve the row with the specified ID
-    csv = CSV.read("./db/gossip.csv")
-    if csv[id-1]
-      gossip = Gossip.new(csv[id-1][0], csv[id-1][1])
-      erb :gossip, locals: {gossip: gossip}
-    else
-      "Gossip not found"
-    end
+    gossip = Gossip.find(id)
+    erb :show, locals: { gossip: gossip }
   end
 
 end
